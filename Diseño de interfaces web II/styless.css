@@ -1,0 +1,104 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezado */
+.header {
+    background: #0071dc; /* azul Walmart-like */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.header .nav a {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hero principal */
+.hero {
+    background: #e0f4ff;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 2rem;
+    color: #005bb5;
+}
+
+/* Sección de productos */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-card h2 {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.price {
+    color: #009927;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+button {
+    background: #0071dc;
+    color: rgb(56, 32, 233);
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #005bb5;
+}
+
+/* Pie de página */
+.footer {
+    background: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 200px;          
+}
+
+.carousel-img {
+  max-height: 100%;       
+  object-fit: cover;
+}

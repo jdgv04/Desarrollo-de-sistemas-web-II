@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Sara - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="imagenes/images.png" width="40" height="40" class="me-2">
+      Tienda Sara
+    </a>
+    <input class="form-control w-50" type="search" placeholder="Buscar productos">
+    <a href="carrito.html" class="btn btn-warning position-relative">
+    <img src="imagenes/carrito.png" width="40" height="40">
+    <span id="contadorCarrito"
+    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    style="display: none;">
+    0
+  </span>
+
+</a>
+  </div>
+</nav>
+
+<!-- NAVBAR SECUNDARIO -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item"><a class="nav-link fw-bold" href="galeria.html">Categorías</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Guantes</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Bates</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Ropa</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- CARRUSEL -->
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner text-center">
+    <div class="carousel-item active">
+      <img src="imagenes/promociones2.jpg" class="d-block w-50 mx-auto">
+    </div>
+    <div class="carousel-item">
+      <img src="imagenes/promociones3.jpg" class="d-block w-50 mx-auto">
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTOS DESTACADOS -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Productos Destacados</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <!-- PRODUCTO 1 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/Guante.webp" class="card-img-top">
+        <div class="card-body text-center">
+          <h5>Guante de béisbol Rawlings</h5>
+          <p class="text-success">$999</p>
+          <button class="btn btn-primary"
+          onclick="agregarAlCarrito('Guante de béisbol Rawlings',999,'imagenes/Guante.webp')">
+          Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 2 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/bataluminio1.webp" class="card-img-top">
+        <div class="card-body text-center">
+          <h5>Bat de aluminio</h5>
+          <p class="text-success">$1299</p>
+          <button class="btn btn-primary"
+          onclick="agregarAlCarrito('Bat de aluminio',1299,'imagenes/bataluminio1.webp')">
+          Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 3 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/casacayankees.webp" class="card-img-top">
+        <div class="card-body text-center">
+          <h5>Jersey Yankees alternativo</h5>
+          <p class="text-success">$3099</p>
+          <button class="btn btn-primary"
+          onclick="agregarAlCarrito('Jersey Yankees alternativo',3099,'imagenes/casacayankees.webp')">
+          Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="bg-dark text-white text-center p-3 mt-5">
+  © 2026 Tienda Sara
+</footer>
+
+<script>
+function actualizarContador() {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let totalCantidad = 0;
+  carrito.forEach(p => totalCantidad += p.cantidad);
+  let contador = document.getElementById("contadorCarrito");
+  if(totalCantidad > 0){
+    contador.style.display = "inline-block";
+    contador.innerText = totalCantidad;
+  } else {
+    contador.style.display = "none";
+  }
+}
+
+function agregarAlCarrito(nombre, precio, imagen){
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let prodExistente = carrito.find(p => p.nombre===nombre && p.precio===precio);
+  if(prodExistente){
+    prodExistente.cantidad++;
+  } else {
+    carrito.push({nombre, precio, imagen, cantidad:1});
+  }
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarContador();
+  alert("Producto agregado al carrito ");
+}
+
+document.addEventListener("DOMContentLoaded", actualizarContador);
+</script>
+
+</body>
+</html>
