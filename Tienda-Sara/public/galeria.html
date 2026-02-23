@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Sara - Galería</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card-img-top { height: 200px; object-fit: cover; }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="imagenes/images.png" width="40" height="40" class="me-2">
+      Tienda Sara
+    </a>
+    <input class="form-control w-50" type="search" placeholder="Buscar productos">
+    <a href="carrito.html" class="btn btn-warning position-relative">
+    <img src="imagenes/carrito.png" width="40" height="40">
+    <span id="contadorCarrito"
+    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    style="display: none;">
+    0
+  </span>
+
+</a>
+  </div>
+</nav>
+
+<!-- NAVBAR SECUNDARIA -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item"><a class="nav-link fw-bold" href="galeria.html">Categorías</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Guantes</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Bates</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Ropa</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Galería de Productos</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <!-- Producto 1 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/Guante.webp" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Guante de béisbol Rawlings</h5>
+          <p class="text-success fw-bold">$999</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Guante de béisbol Rawlings',999,'imagenes/Guante.webp')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/bataluminio1.webp" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Bat de aluminio</h5>
+          <p class="text-success fw-bold">$1299</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Bat de aluminio',1299,'imagenes/bataluminio1.webp')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/casacayankees.webp" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Jersey Yankees alternativo</h5>
+          <p class="text-success fw-bold">$3099</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Jersey Yankees alternativo',3099,'imagenes/casacayankees.webp')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/arreos.png" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Arreos de Catcher</h5>
+          <p class="text-success fw-bold">$2499</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Arreos de Catcher',2499,'imagenes/arreos.png')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 5 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/guante3.jpg" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Guante Rawlings Pro</h5>
+          <p class="text-success fw-bold">$1499</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Guante Rawlings Pro',1499,'imagenes/guante3.jpg')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 6 -->
+    <div class="col">
+      <div class="card h-100">
+        <img src="imagenes/Guante2.jpg" class="card-img-top">
+        <div class="card-body text-center d-flex flex-column">
+          <h5>Guante genérico</h5>
+          <p class="text-success fw-bold">$799</p>
+          <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito('Guante genérico',799,'imagenes/Guante2.jpg')">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function actualizarContador() {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let totalCantidad = 0;
+  carrito.forEach(p => totalCantidad += p.cantidad);
+  let contador = document.getElementById("contadorCarrito");
+  if(totalCantidad > 0){
+    contador.style.display = "inline-block";
+    contador.innerText = totalCantidad;
+  } else {
+    contador.style.display = "none";
+  }
+}
+
+function agregarAlCarrito(nombre, precio, imagen){
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let prodExistente = carrito.find(p => p.nombre===nombre && p.precio===precio);
+  if(prodExistente){
+    prodExistente.cantidad++;
+  } else {
+    carrito.push({nombre, precio, imagen, cantidad:1});
+  }
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarContador();
+  alert("Producto agregado al carrito");
+}
+
+document.addEventListener("DOMContentLoaded", actualizarContador);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
